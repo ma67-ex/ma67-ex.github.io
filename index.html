@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Muhammad Abdullah</title>
+<meta name="description" content="Muhammad Abdullah — AI & Quantitative Economics student at the University at Buffalo. Building at the intersection of machine learning and financial markets." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#000; --text:#f5f5f7; --muted:#86868b; --dim:#6e6e73;
+  --card:#141416; --card2:#1b1b1f; --line:rgba(255,255,255,.10);
+  --line2:rgba(255,255,255,.16); --glow:#3a3a6e;
+  --ff:-apple-system,BlinkMacSystemFont,'Inter',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--ff);background:var(--bg);color:var(--text);line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.shell{position:relative;z-index:1}
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;height:50px;
+  background:rgba(0,0,0,.55);backdrop-filter:saturate(180%) blur(18px);
+  border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:100%}
+.brand{font-weight:600;font-size:16px;letter-spacing:-.2px}
+.menu{display:flex;gap:30px}
+.menu a{font-size:13px;color:#d6d6d8;opacity:.85;transition:opacity .2s}
+.menu a:hover{opacity:1}
+@media(max-width:640px){.menu{gap:18px}.menu a:nth-child(n+4){display:none}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:90px 28px 60px}
+.kicker{font-size:15px;color:var(--muted);margin-bottom:22px;font-weight:500;letter-spacing:.2px}
+.hero h1{font-size:clamp(52px,11vw,118px);font-weight:700;letter-spacing:-.04em;
+  line-height:.96;margin-bottom:26px;
+  background:linear-gradient(180deg,#fff 0%,#fff 55%,#9b9ba3 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:clamp(20px,3.2vw,30px);font-weight:500;color:#d6d6d8;
+  max-width:680px;margin:0 auto 16px;letter-spacing:-.01em;line-height:1.3}
+.hero .desc{font-size:17px;color:var(--muted);max-width:520px;margin:0 auto 42px}
+.actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:500;
+  padding:13px 26px;border-radius:980px;transition:.25s}
+.pill.fill{background:#f5f5f7;color:#000}
+.pill.fill:hover{background:#fff;transform:scale(1.03)}
+.pill.line{border:1px solid var(--line2);color:#f5f5f7}
+.pill.line:hover{border-color:#fff;background:rgba(255,255,255,.04)}
+.scrollcue{margin-top:64px;font-size:12px;color:var(--dim);letter-spacing:.3em;
+  text-transform:uppercase;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(7px);opacity:.5}}
+
+/* SECTION SHELL */
+section{padding:clamp(80px,12vw,150px) 0;position:relative}
+.label{font-size:14px;color:var(--muted);font-weight:600;margin-bottom:18px;
+  text-align:center;letter-spacing:.02em}
+.title{font-size:clamp(34px,6vw,60px);font-weight:700;letter-spacing:-.03em;
+  line-height:1.05;text-align:center;max-width:780px;margin:0 auto 30px}
+.title .grey{color:var(--dim)}
+.center-lead{font-size:clamp(18px,2.5vw,22px);color:var(--muted);text-align:center;
+  max-width:640px;margin:0 auto;line-height:1.5}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:60px}
+.about-grid p{font-size:18px;color:#c4c4c8;line-height:1.65}
+.about-grid .accent{color:#fff}
+@media(max-width:720px){.about-grid{grid-template-columns:1fr;gap:18px}}
+
+/* SKILLS */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;margin-top:64px}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:22px;
+  padding:30px 28px;transition:.3s}
+.scard:hover{border-color:var(--line2);background:var(--card2);transform:translateY(-4px)}
+.scard h3{font-size:14px;color:var(--muted);font-weight:600;margin-bottom:18px}
+.tag{display:inline-block;font-size:14px;color:#e3e3e6;background:rgba(255,255,255,.06);
+  border:1px solid var(--line);padding:7px 13px;border-radius:11px;margin:0 7px 9px 0}
+
+/* WORK */
+.work{margin-top:64px}
+.feature{background:var(--card);border:1px solid var(--line);border-radius:28px;
+  overflow:hidden;display:grid;grid-template-columns:1.15fr .85fr;transition:.3s}
+.feature:hover{border-color:var(--line2)}
+.feature .shot{background:#0a0a0c;padding:26px;display:flex;align-items:center;
+  border-right:1px solid var(--line)}
+.feature .shot img{width:100%;border-radius:14px;display:block;
+  box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.feature .meta{padding:44px 40px;display:flex;flex-direction:column;justify-content:center}
+.feature .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+.feature .chip{font-size:12px;color:#b9b9bf;background:rgba(255,255,255,.06);
+  padding:5px 11px;border-radius:8px;letter-spacing:.02em}
+.feature h3{font-size:28px;font-weight:700;letter-spacing:-.02em;margin-bottom:14px}
+.feature p{font-size:16px;color:var(--muted);line-height:1.6;margin-bottom:26px}
+.feature .go{font-size:16px;font-weight:500;color:#fff;display:inline-flex;
+  align-items:center;gap:7px;width:fit-content}
+.feature .go:hover{gap:12px}
+@media(max-width:760px){.feature{grid-template-columns:1fr}
+  .feature .shot{border-right:none;border-bottom:1px solid var(--line)}
+  .feature .meta{padding:32px 28px}}
+
+.soon{margin-top:18px;background:var(--card);border:1px solid var(--line);
+  border-radius:22px;padding:30px 34px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;flex-wrap:wrap}
+.soon h4{font-size:19px;font-weight:600;margin-bottom:5px}
+.soon p{font-size:15px;color:var(--muted);max-width:520px}
+.soon .badge{font-size:13px;color:var(--dim);border:1px solid var(--line);
+  padding:7px 15px;border-radius:980px;white-space:nowrap}
+
+/* EXPERIENCE */
+.exp{margin-top:60px;max-width:760px;margin-left:auto;margin-right:auto}
+.row{display:grid;grid-template-columns:170px 1fr;gap:24px;padding:26px 0;
+  border-top:1px solid var(--line)}
+.row:last-child{border-bottom:1px solid var(--line)}
+.row .yr{font-size:15px;color:var(--dim);font-weight:500}
+.row h3{font-size:20px;font-weight:600;margin-bottom:4px}
+.row .co{font-size:15px;color:var(--muted);margin-bottom:10px}
+.row p{font-size:15px;color:#a8a8ae;line-height:1.6}
+@media(max-width:600px){.row{grid-template-columns:1fr;gap:6px}}
+
+/* CONTACT */
+.contact{text-align:center}
+.contact .actions{margin-top:38px}
+footer{border-top:1px solid var(--line);padding:34px 0;margin-top:40px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:14px}
+footer p{font-size:13px;color:var(--dim)}
+footer .fl{display:flex;gap:24px}
+footer .fl a{font-size:13px;color:var(--muted);transition:color .2s}
+footer .fl a:hover{color:#fff}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(30px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="shell">
+<nav id="nav">
+  <div class="wrap">
+    <div class="brand">Muhammad Abdullah</div>
+    <div class="menu">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="kicker">AI &amp; Quantitative Economics · University at Buffalo</div>
+  <h1>Muhammad<br>Abdullah</h1>
+  <p class="sub">Building at the intersection of machine learning and financial markets.</p>
+  <p class="desc">Machine learning, LLMs, and algorithmic finance — turning logic into markets.</p>
+  <div class="actions">
+    <a class="pill fill" href="#work">View my work</a>
+    <a class="pill line" href="#contact">Get in touch</a>
+  </div>
+  <div class="scrollcue">Scroll</div>
+</header>
+
+<section id="about">
+  <div class="wrap reveal">
+    <div class="label">About</div>
+    <h2 class="title">A builder with a <span class="grey">quantitative mind.</span></h2>
+    <div class="about-grid">
+      <p>I'm a first-year AI &amp; Quantitative Economics student at the University at Buffalo, focused on where machine learning meets financial markets — <span class="accent">algorithmic trading, LLMs, and data-driven economic modeling.</span></p>
+      <p>Before university I founded and ran <span class="accent">E-Sahulat Mart</span>, an e-commerce business with drop-shipping logistics, and built websites for international clients. That hands-on exposure to pricing, customers, and markets is what makes the quantitative side click for me. I work mainly in Python and C++.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap reveal">
+    <div class="label">Skills</div>
+    <h2 class="title">The tools I build with.</h2>
+    <div class="skills">
+      <div class="scard">
+        <h3>Languages</h3>
+        <span class="tag">Python</span><span class="tag">C++</span><span class="tag">JavaScript</span><span class="tag">SQL</span>
+      </div>
+      <div class="scard">
+        <h3>Quant &amp; Machine Learning</h3>
+        <span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Backtesting</span><span class="tag">Econometrics</span>
+      </div>
+      <div class="scard">
+        <h3>Web &amp; Tools</h3>
+        <span class="tag">HTML &amp; CSS</span><span class="tag">WordPress</span><span class="tag">Git</span><span class="tag">SEO</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap reveal">
+    <div class="label">Work</div>
+    <h2 class="title">Things I've built.</h2>
+    <div class="work">
+      <div class="feature">
+        <div class="shot"><img src="backtest.png" alt="Backtester results chart" /></div>
+        <div class="meta">
+          <div class="chips"><span class="chip">Python</span><span class="chip">pandas</span><span class="chip">Quant Finance</span></div>
+          <h3>Trading Strategy Backtester</h3>
+          <p>A methodologically-correct backtesting engine for a moving-average crossover strategy — no look-ahead bias, a fair buy-and-hold benchmark, and risk-adjusted metrics like Sharpe ratio and max drawdown.</p>
+          <a class="go" href="https://github.com/ma67-ex/stock-backtester" target="_blank">View on GitHub →</a>
+        </div>
+      </div>
+      <div class="soon">
+        <div>
+          <h4>News-Sentiment Engine</h4>
+          <p>An LLM-powered tool that turns news and earnings-call sentiment into a quantitative signal for any ticker.</p>
+        </div>
+        <span class="badge">In progress</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap reveal">
+    <div class="label">Experience</div>
+    <h2 class="title">The path so far.</h2>
+    <div class="exp">
+      <div class="row">
+        <div class="yr">2025 — Present</div>
+        <div>
+          <h3>AI &amp; Quantitative Economics</h3>
+          <div class="co">University at Buffalo</div>
+          <p>Studying artificial intelligence, quantitative methods, and economics. Recipient of an Academic Integrity Award.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="yr">2024 — 2025</div>
+        <div>
+          <h3>Web Developer</h3>
+          <div class="co">Wisdom IT Solutions</div>
+          <p>Built responsive websites for international clients, handled on-page SEO, and trained new interns.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="yr">2023 — 2025</div>
+        <div>
+          <h3>Founder &amp; Owner</h3>
+          <div class="co">E-Sahulat Mart</div>
+          <p>Launched an e-commerce platform from concept to a revenue-generating business with drop-shipping logistics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap reveal">
+    <div class="label">Contact</div>
+    <h2 class="title">Let's build something.</h2>
+    <p class="center-lead">Open to internships and research in quantitative finance, data science, and applied machine learning.</p>
+    <div class="actions">
+      <a class="pill fill" href="mailto:muhmmadabdullahumer@gmail.com">Email me</a>
+      <a class="pill line" href="https://www.linkedin.com/in/ma67" target="_blank">LinkedIn</a>
+      <a class="pill line" href="https://github.com/ma67-ex" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Muhammad Abdullah</p>
+    <div class="fl">
+      <a href="https://github.com/ma67-ex" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/ma67" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>10)});
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const cv=document.getElementById('stars'),cx=cv.getContext('2d');
+let W,H,DPR,stars=[],shoot=null,t=0;
+function init(){
+  DPR=Math.min(devicePixelRatio||1,2);
+  W=cv.width=innerWidth*DPR;H=cv.height=innerHeight*DPR;
+  cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';
+  const n=Math.round(innerWidth*innerHeight/6500);
+  stars=[];
+  for(let i=0;i<n;i++){
+    stars.push({x:Math.random()*W,y:Math.random()*H,
+      r:(Math.random()*1.2+.3)*DPR,
+      a:Math.random()*.6+.2,
+      tw:Math.random()*.02+.004,
+      ph:Math.random()*6.28,
+      vy:(Math.random()*.12+.03)*DPR});
+  }
+}
+function draw(){
+  t++;
+  cx.clearRect(0,0,W,H);
+  const g=cx.createRadialGradient(W*.5,H*.18,0,W*.5,H*.18,H*.9);
+  g.addColorStop(0,'rgba(40,42,80,.28)');
+  g.addColorStop(.5,'rgba(15,16,32,.10)');
+  g.addColorStop(1,'rgba(0,0,0,0)');
+  cx.fillStyle=g;cx.fillRect(0,0,W,H);
+  for(const s of stars){
+    const tw=s.a+Math.sin(t*s.tw+s.ph)*.28;
+    cx.globalAlpha=Math.max(.05,Math.min(1,tw));
+    cx.fillStyle='#fff';
+    cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.28);cx.fill();
+    s.y+=s.vy;if(s.y>H+4){s.y=-4;s.x=Math.random()*W}
+  }
+  cx.globalAlpha=1;
+  if(!shoot&&Math.random()<.004){
+    shoot={x:Math.random()*W*.7,y:Math.random()*H*.4,len:0,life:0,
+      vx:(6+Math.random()*4)*DPR,vy:(2.5+Math.random()*2)*DPR};
+  }
+  if(shoot){
+    shoot.life++;
+    const ex=shoot.x+shoot.vx*8,ey=shoot.y+shoot.vy*8;
+    const grad=cx.createLinearGradient(shoot.x,shoot.y,ex,ey);
+    grad.addColorStop(0,'rgba(255,255,255,.9)');
+    grad.addColorStop(1,'rgba(255,255,255,0)');
+    cx.strokeStyle=grad;cx.lineWidth=1.4*DPR;
+    cx.beginPath();cx.moveTo(shoot.x,shoot.y);cx.lineTo(ex,ey);cx.stroke();
+    shoot.x+=shoot.vx;shoot.y+=shoot.vy;
+    if(shoot.life>60||shoot.x>W)shoot=null;
+  }
+  requestAnimationFrame(draw);
+}
+init();draw();
+let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(init,200)});
+</script>
+</body>
+</html>
