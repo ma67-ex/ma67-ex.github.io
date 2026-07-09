@@ -71,7 +71,8 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--ff);background:var(--bg);color:var(--text);line-height:1.6;
   -webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;
+  background:radial-gradient(circle 90vh at 50% 18%,rgba(40,42,80,.28) 0%,rgba(15,16,32,.10) 50%,rgba(0,0,0,0) 100%)}
 .shell{position:relative;z-index:1}
 .wrap{max-width:1040px;margin:0 auto;padding:0 28px}
 
@@ -126,14 +127,12 @@ section{padding:clamp(80px,12vw,150px) 0;position:relative}
 @media(max-width:720px){.about-grid{grid-template-columns:1fr;gap:18px}}
 
 /* SKILLS */
-.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:18px;margin-top:64px}
-.scard{background:var(--card);border:1px solid var(--line);border-radius:22px;
-  padding:30px 28px;transition:.3s}
-.scard:hover{border-color:var(--line2);background:var(--card2);transform:translateY(-4px)}
-.scard h3{font-size:14px;color:var(--muted);font-weight:600;margin-bottom:18px}
-.tag{display:inline-block;font-size:14px;color:#e3e3e6;background:rgba(255,255,255,.06);
-  border:1px solid var(--line);padding:7px 13px;border-radius:11px;margin:0 7px 9px 0}
+.skills-simple{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:60px;max-width:760px;margin-left:auto;margin-right:auto}
+.skill-item{padding:20px 0;border-top:1px solid var(--line)}
+.skill-item:nth-child(n+3){border-top:none;padding-top:0}
+.skill-item h3{font-size:16px;font-weight:600;margin-bottom:8px;color:#fff}
+.skill-item p{font-size:15px;color:var(--muted);line-height:1.5}
+@media(max-width:640px){.skills-simple{grid-template-columns:1fr;gap:20px}}
 
 /* WORK */
 .work{margin-top:64px}
@@ -187,10 +186,34 @@ footer .fl{display:flex;gap:24px}
 footer .fl a{font-size:13px;color:var(--muted);transition:color .2s}
 footer .fl a:hover{color:#fff}
 
+/* 3D Effects */
+.scene{perspective:1200px}
+.work{perspective:1200px}
+.scard{transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
+.feature{transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s}
+.pill{transition:transform .3s,box-shadow .3s}
+.soon{transition:transform .5s}
+/* Tilt/parallax only on devices that can actually hover (desktop).
+   Phones skip these entirely so touches don't trigger sticky, repaint-heavy transforms. */
+@media (hover:hover) and (pointer:fine){
+  .scard,.feature,.pill,.soon{transform-style:preserve-3d}
+  .scard:hover{transform:rotateY(8deg) rotateX(-3deg) translateZ(20px);
+    box-shadow:0 30px 60px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.1)}
+  .feature:hover{transform:rotateY(-4deg) rotateX(2deg) translateZ(15px);
+    box-shadow:0 40px 80px rgba(0,0,0,.9)}
+  .pill:hover{transform:translateZ(8px);box-shadow:0 20px 40px rgba(0,0,0,.6)}
+  .soon:hover{transform:rotateY(6deg) translateZ(10px)}
+}
+
 /* reveal */
 .reveal{opacity:0;transform:translateY(30px);
   transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{transition:none}
+  .scrollcue{animation:none}
+  *{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
@@ -206,6 +229,7 @@ footer .fl a:hover{color:#fff}
       <a href="#skills">Skills</a>
       <a href="#work">Work</a>
       <a href="#experience">Experience</a>
+      <a href="#certifications">Certs</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -214,8 +238,8 @@ footer .fl a:hover{color:#fff}
 <header class="hero">
   <div class="kicker">AI &amp; Quantitative Economics, University at Buffalo</div>
   <h1>Muhammad<br>Abdullah</h1>
-  <p class="sub">Building at the intersection of machine learning and financial markets.</p>
-  <p class="desc">Machine learning, LLMs, and algorithmic finance. Turning logic into markets.</p>
+  <p class="sub">Applying machine learning to financial markets.</p>
+  <p class="desc">Focused on machine learning, large language models, and algorithmic trading.</p>
   <div class="actions">
     <a class="pill fill" href="#work">View my work</a>
     <a class="pill line" href="#contact">Get in touch</a>
@@ -229,28 +253,33 @@ footer .fl a:hover{color:#fff}
     <div class="label">About</div>
     <h2 class="title">A builder with a <span class="grey">quantitative mind.</span></h2>
     <div class="about-grid">
-      <p>I'm a first-year AI &amp; Quantitative Economics student at the University at Buffalo, focused on where machine learning meets financial markets: <span class="accent">algorithmic trading, LLMs, and data-driven economic modeling.</span></p>
-      <p>Before university I founded and ran <span class="accent">E-Sahulat Mart</span>, an e-commerce business with drop-shipping logistics, and built websites for international clients. That hands-on exposure to pricing, customers, and markets is what makes the quantitative side click for me. I work mainly in Python and C++.</p>
+      <p>I'm a first-year AI &amp; Quantitative Economics student at the University at Buffalo. My focus is where machine learning meets financial markets, particularly <span class="accent">algorithmic trading, large language models, and data-driven economic modeling.</span></p>
+      <p>Before university, I founded and ran <span class="accent">E-Sahulat Mart</span>, an e-commerce business with drop-shipping logistics, and built websites for international clients. That experience with pricing, customer behavior, and market dynamics shapes how I approach quantitative problems today. I work primarily in Python and C++.</p>
     </div>
   </div>
 </section>
 
+
 <section id="skills">
   <div class="wrap reveal">
     <div class="label">Skills</div>
-    <h2 class="title">The tools I build with.</h2>
-    <div class="skills">
-      <div class="scard">
-        <h3>Languages</h3>
-        <span class="tag">Python</span><span class="tag">C++</span><span class="tag">JavaScript</span><span class="tag">SQL</span>
+    <h2 class="title">Core Competencies.</h2>
+    <div class="skills-simple">
+      <div class="skill-item">
+        <h3>Programming</h3>
+        <p>Python, C++, JavaScript</p>
       </div>
-      <div class="scard">
-        <h3>Quant &amp; Machine Learning</h3>
-        <span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Backtesting</span><span class="tag">Econometrics</span>
+      <div class="skill-item">
+        <h3>Quantitative Finance</h3>
+        <p>Backtesting, Statistical Analysis, Risk Modeling</p>
       </div>
-      <div class="scard">
-        <h3>Web &amp; Tools</h3>
-        <span class="tag">HTML &amp; CSS</span><span class="tag">WordPress</span><span class="tag">Git</span><span class="tag">SEO</span>
+      <div class="skill-item">
+        <h3>Data &amp; ML</h3>
+        <p>Pandas, NumPy, Data Analysis, Market Signals</p>
+      </div>
+      <div class="skill-item">
+        <h3>Web Development</h3>
+        <p>HTML, CSS, Full-stack Web Applications</p>
       </div>
     </div>
   </div>
@@ -259,23 +288,30 @@ footer .fl a:hover{color:#fff}
 <section id="work">
   <div class="wrap reveal">
     <div class="label">Work</div>
-    <h2 class="title">Things I've built.</h2>
-    <div class="work">
-      <div class="feature">
-        <div class="shot"><img src="backtest.png" alt="Backtester results chart" width="1440" height="960" /></div>
-        <div class="meta">
-          <div class="chips"><span class="chip">Python</span><span class="chip">pandas</span><span class="chip">Quant Finance</span></div>
-          <h3>Trading Strategy Backtester</h3>
-          <p>A methodologically-correct backtesting engine for a moving-average crossover strategy: no look-ahead bias, a fair buy-and-hold benchmark, and risk-adjusted metrics like Sharpe ratio and max drawdown.</p>
-          <a class="go" href="https://github.com/ma67-ex/stock-backtester" target="_blank">View on GitHub →</a>
+    <h2 class="title">What I'm building.</h2>
+    <div class="exp">
+      <div class="row">
+        <div class="yr">Backtester</div>
+        <div>
+          <h3>Trading Strategy Engine</h3>
+          <p>Built a backtesting framework in Python with proper methodology, including safeguards against look-ahead bias and accurate benchmarking. Used it for real strategy development.</p>
+          <a class="go" href="https://github.com/ma67-ex/stock-backtester" target="_blank">View →</a>
         </div>
       </div>
-      <div class="soon">
+      <div class="row">
+        <div class="yr">Sahm Halal</div>
         <div>
-          <h4>News-Sentiment Engine</h4>
-          <p>An LLM-powered tool that turns news and earnings-call sentiment into a quantitative signal for any ticker.</p>
+          <h3>Live Stock Analyzer</h3>
+          <p>A web app that analyzes stocks in real time, covering halal-compliant and global markets with trend signals and momentum indicators.</p>
+          <a class="go" href="https://halal-stocks-five.vercel.app" target="_blank">View →</a>
         </div>
-        <span class="badge">In progress</span>
+      </div>
+      <div class="row">
+        <div class="yr">In progress</div>
+        <div>
+          <h3>Market Sentiment Analysis</h3>
+          <p>Building a tool that pulls quantitative signals from news and earnings calls. Testing different approaches to extract alpha.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -314,11 +350,37 @@ footer .fl a:hover{color:#fff}
   </div>
 </section>
 
+<section id="certifications">
+  <div class="wrap reveal">
+    <div class="label">Certifications</div>
+    <h2 class="title">Credentials.</h2>
+    <div class="exp">
+      <div class="row">
+        <div class="yr">Coursera</div>
+        <div>
+          <h3>Build a Website with WordPress</h3>
+          <div class="co">Coursera Project Network &middot; Sep 2025</div>
+          <p>Guided project on building and publishing a website with WordPress.</p>
+          <a class="go" href="https://coursera.org/verify/1Y218ZQACG1Y" target="_blank">Verify →</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="yr">D2L</div>
+        <div>
+          <h3>Academic Integrity Badge</h3>
+          <div class="co">D2L</div>
+          <p>Recognizes a demonstrated commitment to academic honesty and integrity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contact" class="contact">
   <div class="wrap reveal">
     <div class="label">Contact</div>
     <h2 class="title">Let's build something.</h2>
-    <p class="center-lead">Open to internships and research in quantitative finance, data science, and applied machine learning.</p>
+    <p class="center-lead">Open to internship and research opportunities in quantitative finance, data science, and applied machine learning.</p>
     <div class="actions">
       <a class="pill fill" href="mailto:muhmmadabdullahumer@gmail.com">Email me</a>
       <a class="pill line" href="https://www.linkedin.com/in/ma67" target="_blank">LinkedIn</a>
@@ -346,12 +408,19 @@ const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.t
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 const cv=document.getElementById('stars'),cx=cv.getContext('2d');
-let W,H,DPR,stars=[],shoot=null,t=0;
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const mobile=matchMedia('(max-width:640px)').matches||('ontouchstart'in window);
+// Cap pixel density on phones (retina DPR of 3 = 4x the pixels to paint every frame).
+const maxDPR=mobile?1.5:2;
+// Thin the field and slow the frame rate on phones to keep it smooth and easy on the battery.
+const density=mobile?12000:6500;
+const minFrame=mobile?1000/30:0;
+let W,H,DPR,stars=[],shoot=null,t=0,last=0,lastW=0;
 function init(){
-  DPR=Math.min(devicePixelRatio||1,2);
+  DPR=Math.min(devicePixelRatio||1,maxDPR);
   W=cv.width=innerWidth*DPR;H=cv.height=innerHeight*DPR;
   cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';
-  const n=Math.round(innerWidth*innerHeight/6500);
+  const n=Math.round(innerWidth*innerHeight/density);
   stars=[];
   for(let i=0;i<n;i++){
     stars.push({x:Math.random()*W,y:Math.random()*H,
@@ -362,22 +431,23 @@ function init(){
       vy:(Math.random()*.12+.03)*DPR});
   }
 }
-function draw(){
-  t++;
+function paintStars(){
   cx.clearRect(0,0,W,H);
-  const g=cx.createRadialGradient(W*.5,H*.18,0,W*.5,H*.18,H*.9);
-  g.addColorStop(0,'rgba(40,42,80,.28)');
-  g.addColorStop(.5,'rgba(15,16,32,.10)');
-  g.addColorStop(1,'rgba(0,0,0,0)');
-  cx.fillStyle=g;cx.fillRect(0,0,W,H);
+  cx.fillStyle='#fff';
   for(const s of stars){
     const tw=s.a+Math.sin(t*s.tw+s.ph)*.28;
     cx.globalAlpha=Math.max(.05,Math.min(1,tw));
-    cx.fillStyle='#fff';
     cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.28);cx.fill();
     s.y+=s.vy;if(s.y>H+4){s.y=-4;s.x=Math.random()*W}
   }
   cx.globalAlpha=1;
+}
+function draw(now){
+  requestAnimationFrame(draw);
+  if(now-last<minFrame)return; // frame-limit on mobile
+  last=now;
+  t++;
+  paintStars();
   if(!shoot&&Math.random()<.004){
     shoot={x:Math.random()*W*.7,y:Math.random()*H*.4,len:0,life:0,
       vx:(6+Math.random()*4)*DPR,vy:(2.5+Math.random()*2)*DPR};
@@ -393,10 +463,13 @@ function draw(){
     shoot.x+=shoot.vx;shoot.y+=shoot.vy;
     if(shoot.life>60||shoot.x>W)shoot=null;
   }
-  requestAnimationFrame(draw);
 }
-init();draw();
-let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(init,200)});
+init();lastW=innerWidth;
+if(reduce){paintStars();}else{requestAnimationFrame(draw);}
+let rt;addEventListener('resize',()=>{
+  if(innerWidth===lastW)return; // ignore mobile address-bar show/hide (height-only resize)
+  lastW=innerWidth;clearTimeout(rt);rt=setTimeout(()=>{init();if(reduce)paintStars();},200);
+});
 </script>
 </body>
 </html>
