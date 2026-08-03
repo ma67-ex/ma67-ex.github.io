@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://ma67-ex.github.io/sitemap.xml
+Sitemap: https://ma67.dev/sitemap.xml
